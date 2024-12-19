@@ -419,6 +419,7 @@ Disassembly of section .text:
   400fcd:	c3                   	ret
 
 0000000000400fce <func4>:
+  ;%edi : input1, %esi : 0, %edx : 0xe
   400fce:	48 83 ec 08          	sub    $0x8,%rsp
   400fd2:	89 d0                	mov    %edx,%eax
   400fd4:	29 f0                	sub    %esi,%eax
@@ -427,6 +428,7 @@ Disassembly of section .text:
   400fdb:	01 c8                	add    %ecx,%eax
   400fdd:	d1 f8                	sar    $1,%eax
   400fdf:	8d 0c 30             	lea    (%rax,%rsi,1),%ecx
+  ;%edi : input1, %esi : 0, %edx : 0xe, %eax : 7, %ecx : 7
   400fe2:	39 f9                	cmp    %edi,%ecx
   400fe4:	7e 0c                	jle    400ff2 <func4+0x24>
   400fe6:	8d 51 ff             	lea    -0x1(%rcx),%edx
@@ -479,7 +481,7 @@ Disassembly of section .text:
   401082:	74 4e                	je     4010d2 <phase_5+0x70>
   401084:	e8 b1 03 00 00       	call   40143a <explode_bomb>
   401089:	eb 47                	jmp    4010d2 <phase_5+0x70>
-  40108b:	0f b6 0c 03          	movzbl (%rbx,%rax,1),%ecx
+  40108b:	0f b6 0c 03          	movzbl (%rbx,%rax,1),%ecx ; %rbx指向输入字符串的起始位置, %rax 初始为0
   40108f:	88 0c 24             	mov    %cl,(%rsp)
   401092:	48 8b 14 24          	mov    (%rsp),%rdx
   401096:	83 e2 0f             	and    $0xf,%edx
@@ -540,6 +542,7 @@ Disassembly of section .text:
   40114b:	7e e8                	jle    401135 <phase_6+0x41>
   40114d:	49 83 c5 04          	add    $0x4,%r13
   401151:	eb c1                	jmp    401114 <phase_6+0x20>
+
   401153:	48 8d 74 24 18       	lea    0x18(%rsp),%rsi
   401158:	4c 89 f0             	mov    %r14,%rax
   40115b:	b9 07 00 00 00       	mov    $0x7,%ecx
@@ -549,6 +552,7 @@ Disassembly of section .text:
   401166:	48 83 c0 04          	add    $0x4,%rax
   40116a:	48 39 f0             	cmp    %rsi,%rax
   40116d:	75 f1                	jne    401160 <phase_6+0x6c>
+
   40116f:	be 00 00 00 00       	mov    $0x0,%esi
   401174:	eb 21                	jmp    401197 <phase_6+0xa3>
   401176:	48 8b 52 08          	mov    0x8(%rdx),%rdx
